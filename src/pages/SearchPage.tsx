@@ -6,6 +6,7 @@ import ResultCount from "../components/search/ResultCount";
 import BookList from "../components/search/BookList";
 import Pagination from "../components/common/Pagination";
 import { useBookSearch } from "../hooks/useBookSearch";
+import type { SearchTarget } from "../types/book";
 
 const PageTitle = styled.h2.attrs({ className: "search-page__title" })`
   margin: 0 0 var(--space-5) 0;
@@ -30,10 +31,13 @@ const PAGE_SIZE = 10;
 const SearchPage: React.FC = () => {
   const [query, setQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
+  const [target, setTarget] = useState<SearchTarget | undefined>(undefined);
   const [page, setPage] = useState(1);
+  const [advancedOpen, setAdvancedOpen] = useState(false);
 
   const { data, isLoading, isError } = useBookSearch({
     query: submittedQuery,
+    target,
     page,
     size: PAGE_SIZE,
   });
@@ -45,11 +49,22 @@ const SearchPage: React.FC = () => {
 
   const handleQuerySubmit = (q: string) => {
     setSubmittedQuery(q);
+    setTarget(undefined);
+    setPage(1);
+  };
+
+  const handleAdvancedSubmit = (q: string, t: SearchTarget | undefined) => {
+    setQuery(q);
+    setSubmittedQuery(q);
+    setTarget(t);
     setPage(1);
   };
 
   return (
-    <section className="search-page">
+    <section
+      className="search-page"
+      onClick={() => advancedOpen && setAdvancedOpen(false)}
+    >
       <PageTitle>도서 검색</PageTitle>
 
       <Toolbar>
@@ -57,6 +72,9 @@ const SearchPage: React.FC = () => {
           value={query}
           onChange={setQuery}
           setSumbittedQuery={handleQuerySubmit}
+          setAdvancedOpen={setAdvancedOpen}
+          advancedOpen={advancedOpen}
+          handleAdvancedSubmit={handleAdvancedSubmit}
         />
         <ResultCount total={submittedQuery ? total : 0} />
       </Toolbar>

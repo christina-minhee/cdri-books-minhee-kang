@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { media } from "../../styles/breakpoints";
 import { CloseIcon, SearchIcon } from "../common/icons";
 import { useSearchHistory } from "../../hooks/useSearchHistory";
+import AdvancedSearchModal from "./AdvancedSearchModal";
+import type { SearchTarget } from "../../types/book";
 
 const Root = styled.div.attrs({ className: "search-bar" })`
   display: flex;
@@ -147,11 +149,22 @@ const DetailButton = styled.button.attrs({
   }
 `;
 
+const DetailButtonWrapper = styled.div.attrs({
+  className: "search-bar__detail-btn-wrapper",
+})`
+  position: relative;
+`;
+
 interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
   setSumbittedQuery: (value: string) => void;
-  onDetailClick?: () => void;
+  advancedOpen: boolean;
+  setAdvancedOpen: (open: boolean) => void;
+  handleAdvancedSubmit: (
+    query: string,
+    target: SearchTarget | undefined,
+  ) => void;
   placeholder?: string;
 }
 
@@ -159,7 +172,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChange,
   setSumbittedQuery,
-  onDetailClick,
+  advancedOpen,
+  setAdvancedOpen,
+  handleAdvancedSubmit,
   placeholder = "검색어를 입력하세요",
 }) => {
   const [local, setLocal] = useState(value);
@@ -179,6 +194,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
     if (e.key === "Enter") {
       onSubmit(local.trim());
     }
+  };
+
+  const onDetailClick = () => {
+    setAdvancedOpen(true);
   };
 
   return (
@@ -225,7 +244,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
           </SearchHistoryContainer>
         )}
       </SearchWrapper>
-      <DetailButton onClick={onDetailClick}>상세검색</DetailButton>
+      <DetailButtonWrapper>
+        <DetailButton onClick={onDetailClick}>상세검색</DetailButton>
+        <AdvancedSearchModal
+          open={advancedOpen}
+          onClose={() => setAdvancedOpen(false)}
+          onSubmit={handleAdvancedSubmit}
+        />
+      </DetailButtonWrapper>
     </Root>
   );
 };
