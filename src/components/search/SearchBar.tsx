@@ -170,17 +170,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setLocal(value);
   }, [value]);
 
-  const onSubmit = () => {
-    const trimmed = local.trim();
-    if (trimmed) {
-      setSumbittedQuery(trimmed);
-      addKeyword(trimmed);
-    }
+  const onSubmit = (word: string) => {
+    setSumbittedQuery(word);
+    addKeyword(word);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      onSubmit();
+      onSubmit(local.trim());
     }
   };
 
@@ -206,11 +203,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <SearchHistoryContainer>
             {history.map((keyword, idx) => (
               <div key={idx}>
-                {/* // <SearchHistoryWrapper> */}
                 <SearchHistoryItem
                   onClick={() => {
                     setLocal(keyword);
-                    onSubmit();
+                    onSubmit(keyword);
                   }}
                 >
                   {keyword}
