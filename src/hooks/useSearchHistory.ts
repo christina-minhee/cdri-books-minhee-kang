@@ -40,7 +40,6 @@ export const useSearchHistory = () => {
   const addKeyword = (keyword: SearchKeyword) => {
     setHistory((prev) => {
       const next = [keyword, ...prev.filter((k) => k !== keyword)].slice(0, 8);
-      console.log("Adding keyword to history:", keyword, "Next history:", next);
       writeToStorage(next);
       return next;
     });
@@ -49,12 +48,6 @@ export const useSearchHistory = () => {
   const deleteKeyword = (keyword: SearchKeyword) => {
     setHistory((prev) => {
       const next = prev.filter((k) => k !== keyword);
-      console.log(
-        "Deleting keyword from history:",
-        keyword,
-        "Next history:",
-        next,
-      );
       writeToStorage(next);
       return next;
     });
