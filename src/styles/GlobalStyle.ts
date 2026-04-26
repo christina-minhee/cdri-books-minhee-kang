@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 /**
  * Global styles + design tokens as CSS :root variables.
@@ -22,6 +22,8 @@ const GlobalStyle = createGlobalStyle`
     --color-bg-subtle: #F2F4F6;
     --color-bg-input: #F2F4F6;
     --color-bg-button-secondary: #F2F4F6;
+    --color-bg-input-hover: #dadcde;
+
 
     --color-border: #D2D6DA;
     --color-border-light: #E4E7EA;
@@ -68,6 +70,8 @@ const GlobalStyle = createGlobalStyle`
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-search-bar: 100px;
     --radius-pill: 999px;
 
     /* ============ Shadow ============ */

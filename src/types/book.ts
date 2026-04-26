@@ -28,7 +28,7 @@ export interface BookSearchResponse {
   documents: KakaoBook[];
 }
 
-export type SearchTarget = 'title' | 'person' | 'publisher';
+export type SearchTarget = "title" | "person" | "publisher";
 
 export interface SearchParams {
   query: string;
@@ -36,3 +36,5 @@ export interface SearchParams {
   page?: number;
   size?: number;
 }
+
+export type SearchKeyword = string;

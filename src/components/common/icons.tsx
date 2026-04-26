@@ -1,6 +1,24 @@
-import React from 'react';
+import React from "react";
 
 type IconProps = React.SVGProps<SVGSVGElement> & { size?: number };
+
+export const CloseIcon: React.FC<IconProps> = ({ size = 16, ...props }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
 
 export const SearchIcon: React.FC<IconProps> = ({ size = 18, ...props }) => (
   <svg
@@ -30,8 +48,8 @@ export const HeartIcon: React.FC<IconProps & { filled?: boolean }> = ({
     width={size}
     height={size}
     viewBox="0 0 24 24"
-    fill={filled ? '#E84118' : 'none'}
-    stroke={filled ? '#E84118' : '#8D94A0'}
+    fill={filled ? "#E84118" : "none"}
+    stroke={filled ? "#E84118" : "#8D94A0"}
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -41,7 +59,10 @@ export const HeartIcon: React.FC<IconProps & { filled?: boolean }> = ({
   </svg>
 );
 
-export const ChevronDownIcon: React.FC<IconProps> = ({ size = 16, ...props }) => (
+export const ChevronDownIcon: React.FC<IconProps> = ({
+  size = 16,
+  ...props
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
