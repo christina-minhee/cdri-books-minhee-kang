@@ -28,10 +28,10 @@ npm install
 ### 3. Configure environment
 
 ```bash
-cp .env.example .env.local
+cp .env
 ```
 
-Then edit `.env.local`:
+Then edit `.env`:
 
 ```
 REACT_APP_KAKAO_REST_API_KEY=your_actual_key_here
@@ -47,11 +47,11 @@ Open http://localhost:3000.
 
 ## Scripts
 
-| Command        | Description                              |
-| -------------- | ---------------------------------------- |
-| `npm start`    | Run dev server on port 3000              |
-| `npm run build`| Build production bundle to `/build`      |
-| `npm test`     | Run tests                                |
+| Command         | Description                         |
+| --------------- | ----------------------------------- |
+| `npm start`     | Run dev server on port 3000         |
+| `npm run build` | Build production bundle to `/build` |
+| `npm test`      | Run tests                           |
 
 ## Project Structure
 

@@ -1,8 +1,8 @@
-import axios from 'axios';
-import type { BookSearchResponse, SearchParams } from '../types/book';
+import axios from "axios";
+import type { BookSearchResponse, SearchParams } from "../types/book";
 
-const KAKAO_API_BASE = 'https://dapi.kakao.com';
-const KAKAO_REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY ?? '';
+const KAKAO_API_BASE = "https://dapi.kakao.com";
+const KAKAO_REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY ?? "";
 
 const kakaoClient = axios.create({
   baseURL: KAKAO_API_BASE,
@@ -21,14 +21,17 @@ export const searchBooks = async ({
   page = 1,
   size = 10,
 }: SearchParams): Promise<BookSearchResponse> => {
-  const { data } = await kakaoClient.get<BookSearchResponse>('/v3/search/book', {
-    params: {
-      query,
-      ...(target ? { target } : {}),
-      page,
-      size,
-      sort: 'accuracy',
+  const { data } = await kakaoClient.get<BookSearchResponse>(
+    "/v3/search/book",
+    {
+      params: {
+        query,
+        ...(target ? { target } : {}),
+        page,
+        size,
+        sort: "accuracy",
+      },
     },
-  });
+  );
   return data;
 };
